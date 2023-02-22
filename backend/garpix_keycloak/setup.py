@@ -1,17 +1,17 @@
 from setuptools import setup, find_packages
 from os import path
-from m2r import convert
-from django.conf import settings
 
+here = path.join(path.abspath(path.dirname(__file__)), 'garpix_keycloak')
 
-with open(path.join(settings.BASE_DIR, '..', 'README.md'), encoding='utf-8') as f:
-    long_description = convert(f.read())
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
     name='garpix_keycloak',
     version='1.0.0',
     description='',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     url='https://github.com/garpixcms/garpix_keycloak',
     author='Garpix LTD',
     author_email='info@garpix.com',
@@ -33,7 +33,6 @@ setup(
         'Django >= 3.1, < 4',
         'djangorestframework >= 3.8',
         'django-rest-framework-social-oauth2 >= 1.1.0',
-        'garpix-utils >= 1.5.1'
+        'garpix-utils >= 1.8.0'
     ],
 )
-

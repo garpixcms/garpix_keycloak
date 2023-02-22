@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bf4127f74dd2bc99bd087c0503f49e61d50f4ec7918fc839fcb90d0290500b11"
+            "sha256": "443c497683fc9c02586c0b8c79fb8d443b3bdc0e4ffe3e771437241df8ffb674"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -702,6 +702,7 @@
                 "sha256:1edf2c3dc7d1d7abd7f03eea7317b784dc25ea0cc5c3fe4be5b4112170ef35e2",
                 "sha256:3abf4e4b81dda48e450ddc4bdadb5705fd504fe98c8064838298677850f9564b"
             ],
+            "index": "pypi",
             "version": "==1.8.0"
         },
         "garpixcms": {
@@ -722,11 +723,11 @@
         },
         "gitpython": {
             "hashes": [
-                "sha256:769c2d83e13f5d938b7688479da374c4e3d49f71549aaf462b646db9602ea6f8",
-                "sha256:cd455b0000615c60e286208ba540271af9fe531fa6a87cc590a7298785ab2882"
+                "sha256:8ce3bcf69adfdf7c7d503e78fd3b1c492af782d58893b650adb2ac8912ddd573",
+                "sha256:f04893614f6aa713a60cbbe1e6a97403ef633103cdd0ef5eb6efe0deb98dbe8d"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==3.1.30"
+            "version": "==3.1.31"
         },
         "h11": {
             "hashes": [
@@ -1569,11 +1570,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:23c86b4e44432bfd8899384afc08872ec166a24f48a3f99f293b0a557e6a6b5d",
-                "sha256:daec07fd848d80676694d6bf69c009d28910aeece68a38dbe88b7e1bb6dba12e"
+                "sha256:9d3de8591bd6f6522594406fa46a6418eabd0562dacb267f8556675762801514",
+                "sha256:ed4e75fafe103c79b692f217158ba87edf38d31004b9dbc1913debb48793c828"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==67.3.1"
+            "version": "==67.3.3"
         },
         "six": {
             "hashes": [
@@ -1820,11 +1821,11 @@
         },
         "zipp": {
             "hashes": [
-                "sha256:23f70e964bc11a34cef175bc90ba2914e1e4545ea1e3e2f67c079671883f9cb6",
-                "sha256:e8b2a36ea17df80ffe9e2c4fda3f693c3dad6df1697d3cd3af232db680950b0b"
+                "sha256:188834565033387710d046e3fe96acfc9b5e86cbca7f39ff69cf21a4128198b7",
+                "sha256:9e5421e176ef5ab4c0ad896624e87a7b2f07aca746c9b2aa305952800cb8eecb"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==3.13.0"
+            "version": "==3.14.0"
         },
         "zope.interface": {
             "hashes": [

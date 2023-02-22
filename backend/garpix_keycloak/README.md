@@ -67,11 +67,11 @@ Enjoy!
 
 # Changelog
 
-See [CHANGELOG.md](backend/garpix_keycloak/CHANGELOG.md).
+See [CHANGELOG.md](CHANGELOG.md).
 
 # Contributing
 
-See [CONTRIBUTING.md](backend/garpix_keycloak/CONTRIBUTING.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 # License
 

@@ -1,11 +1,10 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.conf import settings
 from garpix_notify.mixins import UserNotifyMixin
 
+from garpix_keycloak.mixins import KeycloakUserMixin
 
-class User(AbstractUser, UserNotifyMixin):
-    pass
+
+class User(AbstractUser, UserNotifyMixin, KeycloakUserMixin):
 
     class Meta:
         verbose_name = 'Пользователь'

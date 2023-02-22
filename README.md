@@ -60,6 +60,21 @@ MIDDLEWARE = [
 ]
 ```
 
+Add keycloak parameters to `settings.py`:
+
+```python
+# settings.py
+
+
+KEYCLOAK = {
+    'SERVER_URL': 'your_server_url',
+    'REALM': 'your_realm',
+    'CLIENT_ID': 'your_client_id',
+    'CLIENT_SECRET_KEY': 'your_client_secret_key'
+}
+
+```
+
 Now when your request has `Bearer` token, it would be firstly checked as base django user token, then as keycloak token.
 
 Enjoy!

@@ -9,10 +9,10 @@ INSTALLED_APPS += [
 ]
 
 KEYCLOAK = {
-    'SERVER_URL': 'https://keycloak-test.infra.garpix.com/auth',
-    'REALM': 'django-test',
-    'CLIENT_ID': 'client-backend',
-    'CLIENT_SECRET_KEY': 'ixtg3YCIeBTEKiPMeJVVOV11qarGBTfH'
+    'SERVER_URL': 'your_server_url',
+    'REALM': 'your_realm',
+    'CLIENT_ID': 'your_client_id',
+    'CLIENT_SECRET_KEY': 'your_client_secret_key'
 }
 
 MIDDLEWARE = [

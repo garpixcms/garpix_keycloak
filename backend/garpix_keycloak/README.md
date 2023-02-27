@@ -75,7 +75,10 @@ KEYCLOAK = {
 
 ```
 
-Now when your request has `Bearer` token, it would be firstly checked as base django user token, then as keycloak token.
+Use `get_keycloak_url` from `KeycloakService` to generate keycloak log in link.
+
+`garpix_keycloak` creates `User` model instance, using `create_keycloak_user` class method. 
+You can override it if you need some customization in your project.
 
 Enjoy!
 

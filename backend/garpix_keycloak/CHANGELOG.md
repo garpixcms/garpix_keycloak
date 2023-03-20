@@ -1,3 +1,8 @@
+### 1.2.0 (20.03.2023)
+
+- Authentication backend added
+
+
 ### 1.1.0 (27.02.2023)
 
 - Url generation added

@@ -60,6 +60,15 @@ MIDDLEWARE = [
 ]
 ```
 
+Add authentication backend:
+
+```python
+AUTHENTICATION_BACKENDS = [
+    # ...
+    'garpix_keycloak.backends.KeycloakAuthenticationBackend'
+]
+```
+
 Add keycloak parameters to `settings.py`:
 
 ```python

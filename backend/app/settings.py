@@ -27,3 +27,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'garpixcms.middleware.locale.GarpixLocaleMiddleware'
 ]
+
+AUTHENTICATION_BACKENDS += [
+    'garpix_keycloak.backends.KeycloakAuthenticationBackend'
+]

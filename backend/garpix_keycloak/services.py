@@ -31,14 +31,14 @@ class KeycloakService:
 
         return response.json().get('access_token', None)
 
-    def get_token_by_code(self, code, request):
+    def get_token_by_code(self, code, request, redirect_uri):
 
         data = {
             "code": code,
             "grant_type": 'authorization_code',
             "client_id": self.client_id,
             "client_secret": self.client_secret_key,
-            "redirect_uri": request.build_absolute_uri(request.path)
+            "redirect_uri": request.build_absolute_uri(redirect_uri)
         }
         response = requests.post(
             f"{self.server_url}/auth/realms/{self.realm}/protocol/openid-connect/token",
@@ -49,7 +49,7 @@ class KeycloakService:
         if response.status_code != 200:
             return None
 
-        return response.json().get('access_token', None)
+        return response.json()
 
     def get_user(self, keycloak_user):
 
@@ -66,7 +66,7 @@ class KeycloakService:
 
         code = request.GET.get('code')
 
-        token = self.get_token_by_code(code, request)
+        token = self.get_token_by_code(code, request, request.build_absolute_uri(request.path)).get('access_token', None)
 
         if not token:
             return None
@@ -74,6 +74,12 @@ class KeycloakService:
         keycloak_user = jwt.decode(token, options={"verify_signature": False})
 
         return self.get_user(keycloak_user)
+
+    def get_user_data_by_token(self, token):
+
+        keycloak_user = jwt.decode(token, options={"verify_signature": False})
+
+        return keycloak_user
 
     def get_keycloak_url(self, request, redirect_uri):
         state = get_random_string(64)

@@ -1,3 +1,7 @@
+### 1.3.0-rc1 (17.11.2023)
+
+- Rest authentication class added
+
 ### 1.2.0-1.2.1 (20.03.2023)
 
 - Authentication backend added

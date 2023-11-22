@@ -1,4 +1,4 @@
-### 1.3.0-rc2-1.4.0-rc3 (22.11.2023)
+### 1.3.0-rc2-1.4.0-rc4 (22.11.2023)
 
 - `KeycloakGroup` model added
 - Groups functionality added

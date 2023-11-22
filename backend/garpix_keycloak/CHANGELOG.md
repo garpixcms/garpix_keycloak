@@ -1,3 +1,9 @@
+### 1.3.0-rc2 (22.11.2023)
+
+- `KeycloakGroup` model added
+- Groups functionality added
+- `KeycloakService` updated
+
 ### 1.3.0-rc1 (17.11.2023)
 
 - Rest authentication class added

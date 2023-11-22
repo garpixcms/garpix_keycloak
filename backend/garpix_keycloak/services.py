@@ -5,6 +5,8 @@ from garpix_utils.string import get_random_string
 from django.utils.http import urlencode
 import jwt
 
+from garpix_keycloak.models import KeycloakGroup
+
 
 class KeycloakService:
     server_url = settings.KEYCLOAK.get('SERVER_URL')
@@ -57,19 +59,37 @@ class KeycloakService:
 
         user = User._default_manager.filter(keycloak_id=keycloak_user['sub']).first()
 
+        prev_keycloak_groups = user.keycloak_groups.all().filter(group__isnull=False).values_list('group', flat=True)
+
+        user.groups.filter(id__in=prev_keycloak_groups).clear()
+
         if not user:
             user = User.create_keycloak_user(keycloak_user)
 
+        keycloak_groups = []
+
+        for _group in keycloak_user['realm_access']['roles']:
+            keycloak_group, _ = KeycloakGroup.objects.get_or_create(name=_group)
+            keycloak_groups.append(keycloak_group)
+            if keycloak_group.group is not None:
+                user.groups.add(keycloak_group.group)
+
+        user.keycloak_groups.set(keycloak_groups, clear=True)
+
         return user
 
-    def get_user_from_request(self, request):
+    def get_user_from_request(self, request, code=None, redirect_url=None):
 
-        code = request.GET.get('code')
+        code = code or request.GET.get('code')
 
-        token = self.get_token_by_code(code, request, request.build_absolute_uri(request.path)).get('access_token', None)
+        redirect_url = redirect_url or request.path
+
+        token = self.get_token_by_code(code, request, redirect_url)
 
         if not token:
             return None
+
+        token = token.get('access_token', None)
 
         keycloak_user = jwt.decode(token, options={"verify_signature": False})
 
@@ -102,3 +122,16 @@ class KeycloakService:
         keycloak_url = f'{self.server_url}/auth/realms/{self.realm}/protocol/openid-connect/auth?{urlencode(query_params)}'
 
         return keycloak_url
+
+    def get_user_info_by_token(self, token):
+
+        headers = {
+            "content-type": "application/x-www-form-urlencoded",
+            "authorization": "Bearer " + token
+        }
+        response = requests.get(
+            f"{self.server_url}/auth/realms/{self.realm}/protocol/openid-connect/userinfo",
+            headers=headers
+        )
+
+        return response.json()

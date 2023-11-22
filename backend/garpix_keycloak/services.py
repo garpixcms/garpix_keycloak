@@ -59,22 +59,26 @@ class KeycloakService:
 
         user = User._default_manager.filter(keycloak_id=keycloak_user['sub']).first()
 
-        prev_keycloak_groups = user.keycloak_groups.all().filter(group__isnull=False).values_list('group', flat=True)
+        try:
+            prev_keycloak_groups = user.keycloak_groups.all().filter(group__isnull=False).values_list('group', flat=True)
 
-        user.groups.filter(id__in=prev_keycloak_groups).clear()
+            user.groups.filter(id__in=prev_keycloak_groups).delete()
 
-        if not user:
-            user = User.create_keycloak_user(keycloak_user)
+            if not user:
+                user = User.create_keycloak_user(keycloak_user)
 
-        keycloak_groups = []
+            keycloak_groups = []
 
-        for _group in keycloak_user['realm_access']['roles']:
-            keycloak_group, _ = KeycloakGroup.objects.get_or_create(name=_group)
-            keycloak_groups.append(keycloak_group)
-            if keycloak_group.group is not None:
-                user.groups.add(keycloak_group.group)
+            for _group in keycloak_user['realm_access']['roles']:
+                keycloak_group, _ = KeycloakGroup.objects.get_or_create(name=_group)
+                keycloak_groups.append(keycloak_group)
+                if keycloak_group.group is not None:
+                    user.groups.add(keycloak_group.group)
 
-        user.keycloak_groups.set(keycloak_groups, clear=True)
+            user.keycloak_groups.set(keycloak_groups, clear=True)
+
+        except Exception as e:
+            print(e)
 
         return user
 

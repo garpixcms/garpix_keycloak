@@ -9,7 +9,7 @@ from garpix_keycloak.models import KeycloakGroup
 class KeycloakUserMixin(models.Model):
     keycloak_id = models.CharField(max_length=128, null=True, blank=True, verbose_name=_('Keycloak ID'))
 
-    groups = models.ManyToManyField(
+    keycloak_groups = models.ManyToManyField(
         KeycloakGroup,
         verbose_name=_('keycloak groups'),
         blank=True,

@@ -63,9 +63,10 @@ class KeycloakService:
             if not user:
                 user = User.create_keycloak_user(keycloak_user)
 
-            prev_keycloak_groups = user.keycloak_groups.all().filter(group__isnull=False).values_list('group', flat=True)
+            prev_keycloak_groups = user.keycloak_groups.all().filter(group__isnull=False).values_list('group',
+                                                                                                      flat=True)
 
-            user.groups.filter(id__in=prev_keycloak_groups).delete()
+            groups = list(user.groups.exclude(id__in=prev_keycloak_groups))
 
             keycloak_groups = []
 
@@ -73,9 +74,10 @@ class KeycloakService:
                 keycloak_group, _ = KeycloakGroup.objects.get_or_create(name=_group)
                 keycloak_groups.append(keycloak_group)
                 if keycloak_group.group is not None:
-                    user.groups.add(keycloak_group.group)
+                    groups.append(keycloak_group.group)
 
             user.keycloak_groups.set(keycloak_groups, clear=True)
+            user.groups.set(groups, clear=True)
 
         except Exception as e:
             print(e)

@@ -60,12 +60,12 @@ class KeycloakService:
         user = User._default_manager.filter(keycloak_id=keycloak_user['sub']).first()
 
         try:
+            if not user:
+                user = User.create_keycloak_user(keycloak_user)
+
             prev_keycloak_groups = user.keycloak_groups.all().filter(group__isnull=False).values_list('group', flat=True)
 
             user.groups.filter(id__in=prev_keycloak_groups).delete()
-
-            if not user:
-                user = User.create_keycloak_user(keycloak_user)
 
             keycloak_groups = []
 

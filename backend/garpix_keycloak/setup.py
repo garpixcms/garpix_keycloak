@@ -8,7 +8,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='garpix_keycloak',
-    version='1.3.0-rc6',
+    version='1.3.0-rc7',
     description='',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -33,6 +33,6 @@ setup(
         'Django >= 3.1, < 4',
         'djangorestframework >= 3.8',
         'django-rest-framework-social-oauth2 >= 1.1.0',
-        'garpix-utils >= 1.8.0'
+        'garpix-utils >= 1.10.0-rc21'
     ],
 )

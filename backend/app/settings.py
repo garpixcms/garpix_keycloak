@@ -31,3 +31,7 @@ MIDDLEWARE = [
 AUTHENTICATION_BACKENDS += [
     'garpix_keycloak.backends.KeycloakAuthenticationBackend'
 ]
+
+ISO_LOGS_NAME = 'garpix_keycloak'
+IB_ISO_LOGS_NAME = 'garpix_keycloak_ib'
+SYSTEM_ISO_LOGS_NAME = 'garpix_keycloak_system'

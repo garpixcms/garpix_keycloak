@@ -1,6 +1,8 @@
-from django.conf import settings
 from django.contrib.auth.middleware import AuthenticationMiddleware
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, get_user_model
+from garpix_utils.logs.enums.get_enums import Action, ActionResult
+from garpix_utils.logs.loggers import ib_logger
+from garpix_utils.logs.services.logger_iso import LoggerIso
 
 
 class KeycloakAuthMiddleware(AuthenticationMiddleware):
@@ -12,5 +14,17 @@ class KeycloakAuthMiddleware(AuthenticationMiddleware):
                 'state') == request.session['keycloak_state']:
 
             user = authenticate(request)
-            if user:
+            if user and not getattr(user, 'is_blocked', False):
                 login(request, user)
+
+                message = f'Пользователь {user.username} вошел в систему.'
+
+                log = ib_logger.create_log(action=Action.user_login.value,
+                                           obj=get_user_model().__name__,
+                                           obj_address=request.path,
+                                           result=ActionResult.success,
+                                           sbj=user.username,
+                                           sbj_address=LoggerIso.get_client_ip(request),
+                                           msg=message)
+
+                ib_logger.write_string(log)

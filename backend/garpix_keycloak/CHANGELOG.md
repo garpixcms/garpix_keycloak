@@ -1,3 +1,8 @@
+### 1.3.0-rc7 (05.12.2023)
+
+- Upgrade `garpix_utils` to min version 1.10.0-rc21
+- Logs added
+
 ### 1.3.0-rc2-1.4.0-rc6 (22.11.2023)
 
 - `KeycloakGroup` model added

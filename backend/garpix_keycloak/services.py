@@ -6,6 +6,9 @@ from django.utils.http import urlencode
 import jwt
 
 from garpix_keycloak.models import KeycloakGroup
+from garpix_utils.logs.enums.get_enums import Action, ActionResult
+from garpix_utils.logs.loggers import ib_logger
+from garpix_utils.logs.services.logger_iso import LoggerIso
 
 
 class KeycloakService:
@@ -53,7 +56,7 @@ class KeycloakService:
 
         return response.json()
 
-    def get_user(self, keycloak_user):
+    def get_user(self, keycloak_user, request):
 
         User = get_user_model()
 
@@ -62,6 +65,15 @@ class KeycloakService:
         try:
             if not user:
                 user = User.create_keycloak_user(keycloak_user)
+
+                ib_logger.write(act=Action.user_registration.value,
+                                obj=User.__name__,
+                                obj_address=request.path,
+                                result=ActionResult.success,
+                                sbj=user.username,
+                                sbj_address=LoggerIso.get_client_ip(request),
+                                msg=f'Создан новый пользователь {user.username}.')
+
 
             prev_keycloak_groups = user.keycloak_groups.all().filter(group__isnull=False).values_list('group',
                                                                                                       flat=True)
@@ -99,7 +111,7 @@ class KeycloakService:
 
         keycloak_user = jwt.decode(token, options={"verify_signature": False})
 
-        return self.get_user(keycloak_user)
+        return self.get_user(keycloak_user, request)
 
     def get_user_data_by_token(self, token):
 

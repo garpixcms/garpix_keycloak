@@ -1,3 +1,8 @@
+### 1.3.0-rc8 (11.12.2023)
+
+- Upgrade `garpix_utils` to min version 1.10.0-rc23
+- Logs fixed
+
 ### 1.3.0-rc7 (05.12.2023)
 
 - Upgrade `garpix_utils` to min version 1.10.0-rc21

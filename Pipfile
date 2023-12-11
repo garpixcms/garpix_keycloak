@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 django = ">=3.1"
 garpixcms = ">=1.0.0"
-garpix-utils = "==1.10.0-rc21"
+garpix-utils = "==1.10.0-rc23"
 
 [dev-packages]
 

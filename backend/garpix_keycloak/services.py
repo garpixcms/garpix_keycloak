@@ -66,7 +66,7 @@ class KeycloakService:
             if not user:
                 user = User.create_keycloak_user(keycloak_user)
 
-                ib_logger.write(act=Action.user_registration.value,
+                ib_logger.write(action=Action.user_registration.value,
                                 obj=User.__name__,
                                 obj_address=request.path,
                                 result=ActionResult.success,

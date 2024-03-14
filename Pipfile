@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = ">=3.1"
-garpixcms = ">=1.0.0"
-garpix-utils = "==1.10.0-rc23"
+django = "==4.2"
+garpixcms = "==4.6.0-rc24"
+garpix-utils = "==1.10.0-rc25"
 
 [dev-packages]
 

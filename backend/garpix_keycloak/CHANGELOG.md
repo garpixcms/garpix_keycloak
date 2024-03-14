@@ -1,3 +1,8 @@
+### 1.3.0-rc9 (14.03.2024)
+
+- Upgrade `garpix_utils` to min version 1.10.0-rc25
+- `Django` < 5 version support added
+
 ### 1.3.0-rc8 (11.12.2023)
 
 - Upgrade `garpix_utils` to min version 1.10.0-rc23
